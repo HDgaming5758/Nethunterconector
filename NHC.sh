@@ -152,5 +152,6 @@ then
 	echo -e "En attente de la clé de comfirmation ..."
 	echo $e
 	read -p ' : ' rep
-	nc -l -p $RP 
+	echo $rep > /tmp/rkc.key
+	nc -l -p $RP < /tmp/rkc.key
 fi
