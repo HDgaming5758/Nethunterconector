@@ -147,7 +147,7 @@ then
 	echo $RKC > rkc.key
 	nc -l -p $RP < rkc.key
 	echo $e
-	nc -l -p $RP -q 5 > client.info
+	nc -l -p $RP -w 5 > client.info
 	echo $e
 	echo -e "En attente de la clé de comfirmation ..."
 	echo $e
