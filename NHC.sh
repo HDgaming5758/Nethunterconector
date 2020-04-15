@@ -88,21 +88,20 @@ then
 		echo $e
 		echo -e "Demande de comfirmation auprés de l'host ..."
 		echo $e
-		sleep 1
+		sleep 2
 		rkc=$(nc $IP $PORT)
-		sleep 1
-		nc $IP $PORT > rkc.key
+		echo $rkc > rkc.key
 		echo "ip=$(ifconfig | grep inet | grep 192 | cut -d'n' -f2 | cut -d'e' -f2 | cut -d't' -f2 | cut -d' ' -f2);nom de domaine=$(uname -n);info os=$(uname -a)" > client.info
 		nc $IP $PORT < client.info
 		if [ "$(cat rkc.key)" = $rkc ]
 		then
 			echo -e "Entrer ($rkc) dans le scripte de de nethunter"
 			echo $e
-			while [ $rep != 'client ok' ]
+			while [ "$rep" != 'client ok' ]
 			do
 				rep=$(nc -nv $IP $PORT)
 			done
-			if [ $rep = 'client ok' ]
+			if [ "$rep" = 'client ok' ]
 			then
 				echo 'ok'
 			fi
@@ -148,9 +147,7 @@ then
 	echo $RKC > rkc.key
 	nc -l -p $RP < rkc.key
 	echo $e
-	nc -l -p $RP < rkc.key
-	echo $e
-	nc -l -p $RP > client.info
+	nc -l -p $RP -q 5 > client.info
 	echo $e
 	echo -e "En attente de la clé de comfirmation ..."
 	echo $e
