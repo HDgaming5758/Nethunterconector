@@ -97,15 +97,13 @@ then
 		then
 			echo -e "Entrer ($rkc) dans le scripte de de nethunter"
 			echo $e
-			while [ "$rep" != 'client ok' ]
-			do
-				rep=$(nc -nv $IP $PORT)
-			done
-			if [ "$rep" = 'client ok' ]
+			xterm -e "./conect $IP $PORT; exit; $SHELL" &
+			if [ "$(cat /tmp/conf.key)" = "$(cat rkc.key)" ]
 			then
 				echo 'ok'
+			else
+				echo $e >/dev/null
 			fi
-			echo "le code ($rep) n'est pas valide"
 		fi
 	fi
 fi
@@ -154,4 +152,34 @@ then
 	read -p ' : ' rep
 	echo $rep > /tmp/rkc.key
 	nc -l -p $RP < /tmp/rkc.key
+	sleep 0.5
+	clear
+	if [ "cat /tmp/rkc.key" == $rep ]
+	then
+			clear
+		echo $e
+		echo $e
+		echo $e
+		echo -e "$COL                       \033[31m    ███▄    █  ██░ ██  ▄████▄  \033[0m"
+		echo -e "$COL                       \033[31mNet ██ ▀█   █ ▓██░ ██▒▒██▀ ▀█  \033[0m"
+		echo -e "$COL                       \033[31m   ▓██  ▀█ ██▒▒██▀▀██░▒▓█    ▄ \033[0m"
+		echo -e "$COL                       \033[31m   ▓██▒  ▐▌██▒░▓█ ░██ ▒▓▓▄ ▄██▒ Hunter\033[0m"
+		echo -e "$COL                       \033[31m   ▒██░   ▓██░ ▓█▒ ██▓▒ ▓███▀ ░\033[0m"
+		echo -e "$COL                       \033[31m   ░ ▒░   ▒ ▒  ▒ ░░▒░▒░ ░▒ ▒  ░\033[0m"
+		echo -e "$COL                       \033[31m   ░ ░░   ░ ▒░ ▒ ░▒░ ░  ░  ▒   \033[0m        V.$ver"
+		echo -e "$COL                       \033[31m      ░   ░ ░  ░  ░░ ░░        \033[0m"
+		echo -e "$COL                       \033[31m            ░  ░  ░  ░░ ░      \033[0m   by HDgaming5758"
+		echo -e "$COL                       \033[31m                      ░        \033[0m"
+		echo -e "$COL                       \033[31m            Conector           \033[0m"
+		echo $e
+		echo $e
+		echo $e
+		echo -e "                              Voullez vous vraimant vous conecter à ? :                               "
+		echo $e
+		echo -e "                                     ip : $(cat client.info | cut -d'=' -f2 | cut -d';' -f1)"
+		echo $e
+		echo -e "                                nom d'host : $(cat client.info | cut -d'=' -f3 | cut -d';' -f1)"
+		echo $e
+		echo -e "                                 info sur l'os : $(cat client.info | cut -d'=' -f4 | cut -d';' -f1)"
+	fi
 fi
