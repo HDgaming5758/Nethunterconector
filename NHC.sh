@@ -98,11 +98,14 @@ then
 			echo -e "Entrer ($rkc) dans le scripte de de nethunter"
 			echo $e
 			xterm -e "./conect $IP $PORT; exit; $SHELL" &
-			if [ "$(cat /tmp/conf.key)" = "$(cat rkc.key)" ]
-			then
-				echo 'ok'
-			else
+			while [  ]
+			do
+				if [ "$(cat /tmp/conf.key)" = "$(cat rkc.key)" ]
+				then
+					echo 'ok'
+				else
 				echo $e >/dev/null
+			done
 			fi
 		fi
 	fi
@@ -154,9 +157,9 @@ then
 	nc -l -p $RP < /tmp/rkc.key
 	sleep 0.5
 	clear
-	if [ "cat /tmp/rkc.key" == $rep ]
+	if [ "cat rkc.key" == $rep ]
 	then
-			clear
+		clear
 		echo $e
 		echo $e
 		echo $e
